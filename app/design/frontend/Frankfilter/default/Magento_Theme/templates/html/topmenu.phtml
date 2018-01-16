@@ -1,0 +1,50 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php
+/**
+ * Top menu for store
+ *
+ * @var $block \Magento\Theme\Block\Html\Topmenu
+ */
+?>
+<?php $columnsLimit = $block->getColumnsLimit() ?: 0; ?>
+<?php $_menu = $block->getHtml('level-top', 'submenu', $columnsLimit) ?>
+
+<?php
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$customerSession = $objectManager->get('Magento\Customer\Model\Session');
+$storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+$baseUrlWithOutIndexPhp = $storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_WEB);
+?>
+
+<nav class="navigation" data-action="navigation">
+	<ul></ul>
+    <ul data-mage-init='{"menu":{"responsive":true, "expanded":true, "position":{"my":"left top","at":"left bottom"}}}'>
+    	<li class="ui-menu-item level0 nav-1 first last level-top parent ui-menu-item"><a href="<?php echo $baseUrlWithOutIndexPhp; ?>"><?php echo __("Home"); ?></a></li>
+        <?= /* @escapeNotVerified */ $_menu ?>
+        <?= /* @escapeNotVerified */ $block->getChildHtml() ?>
+        <?php if($customerSession->isLoggedIn()) { ?>
+         		<li class="ui-menu-item level0 nav-1 first last level-top parent ui-menu-item"><a href="<?php echo $this->getUrl('customer/account/login/'); ?>"><?php echo __("My Account"); ?></a></li>
+        <?php } else { ?>
+        		<li class="ui-menu-item level0 nav-1 first last level-top parent ui-menu-item"><a href="<?php echo $this->getUrl('customer/account/'); ?>"><?php echo __("My Account"); ?></a></li> 
+        <?php } ?>
+
+        <?php echo $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('menu')->toHtml();?> 
+    </ul>
+</nav>
+
+<script type="text/javascript">
+    require(['jquery'], function($){
+        $(document).ready(function(){
+            $(".level0 .submenu").append("<li class='level1 nav-1-3 last ui-menu-item' role='presentation'><a href='<?php echo $this->getUrl('productregistration/account/create'); ?>'>Product Registration</a></li>.");
+        });
+    });
+</script>   

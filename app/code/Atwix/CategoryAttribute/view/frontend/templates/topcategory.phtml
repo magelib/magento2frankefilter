@@ -1,0 +1,27 @@
+<div class="top-category">
+    <div class="inner-top-category">
+        <?php
+        $objectManagerr = \Magento\Framework\App\ObjectManager::getInstance();
+        $categoryFactory = $objectManagerr->create('Magento\Catalog\Model\ResourceModel\Category\CollectionFactory');
+        $categories = $categoryFactory->create()->addAttributeToFilter('top_category', '1')->addAttributeToSelect('*');
+
+        foreach ($categories as $category):
+            $categoryImage = $category->getImageUrl();
+            ?>
+                <div class="category-home">
+                    <div class="inner-category-home">
+                        <div class="category-name-home">
+                            <a href="<?php echo $category->getUrl(); ?>"><?php echo $category->getName(); ?></a>
+                        </div>
+                        <?php if($categoryImage!="") { ?>
+                            <div class="category-image-name">
+                                <a href="<?php echo $category->getUrl(); ?>"><img src="<?php echo $categoryImage;?>"/></a>
+                            </div>
+                        <?php } ?>
+                    </div>
+                </div> 
+        <?php endforeach; ?>
+
+        <?php echo $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('home-productregistration')->toHtml();?>
+    </div>
+</div> 

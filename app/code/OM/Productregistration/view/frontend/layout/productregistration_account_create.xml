@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+    <body>
+    	<referenceContainer name="content">
+    		<block class="OM\Productregistration\Block\Productregistration"	name="om_productregistration_topcontent" template="OM_Productregistration::productregistration/top.phtml" >		
+			</block>
+    		<block class="Magento\Customer\Block\Form\Login" name="customer_form_login" template="Magento_Customer::form/login.phtml">
+                    <container name="form.additional.info" as="form_additional_info"/>
+            </block>
+
+            <action method="setShowAddressFields" ifconfig="customer/address/showaddressfields">
+                <argument name="show.address.fields" xsi:type="boolean">true</argument>
+            </action>
+
+			<block class="OM\Productregistration\Block\Productregistration"	name="om_productregistration_register" template="OM_Productregistration::productregistration/form.phtml" >		
+			</block>
+		</referenceContainer>
+    </body>
+</page> 

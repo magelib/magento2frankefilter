@@ -1,0 +1,9 @@
+<div>
+	<?php
+	$id = $this->getRequest()->getParam('id'); 
+	$model = $this->getSupportProduct($id);
+	if($model->getImage() != ''){
+	?>
+		<img src="<?php echo $this->getUrl().'pub/media/'.$model->getImage(); ?>" class="img-responsive support_image" alt="<?php echo $model->getSupportTitle(); ?>" />
+	<?php } ?>
+</div>

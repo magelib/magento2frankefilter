@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Solwin Infotech
+ * Solwin Product Print Page
+ * 
+ * @category   Solwin
+ * @package    Solwin_Printpage
+ * @copyright  Copyright © 2006-2016 Solwin (https://www.solwininfotech.com)
+ * @license    https://www.solwininfotech.com/magento-extension-license/
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Backend/etc/menu.xsd">
+    <menu>
+        <add id="Solwin_Printpage::view" title="Print Product Page" module="Solwin_Printpage" sortOrder="5" parent="Solwin_Printpage::extension" resource="Solwin_Printpage::view" />
+        <add id="Solwin_Printpage::printsection" title="Configuration" module="Solwin_Printpage" sortOrder="10" parent="Solwin_Printpage::view" action="adminhtml/system_config/edit/section/printsection" resource="Solwin_Printpage::printsection"/>
+        <add id="Solwin_Printpage::extension" title="Solwin" module="Solwin_Printpage" sortOrder="65" resource="Solwin_Printpage::extension" />
+    </menu>
+</config>

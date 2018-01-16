@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Core/etc/config.xsd">
+	<default>
+		<productregistration_config>
+			<general>
+				<enable_in_frontend>0</enable_in_frontend>
+				<enable_in_sidebar_in_frontend>0</enable_in_sidebar_in_frontend>
+				<productregistration_heading>Customer Productregistrations</productregistration_heading>
+				<productregistration_block_position>1</productregistration_block_position>
+			</general>
+		</productregistration_config>
+	</default>
+</config>

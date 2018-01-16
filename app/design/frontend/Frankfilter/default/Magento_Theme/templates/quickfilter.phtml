@@ -1,0 +1,36 @@
+<?php
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$productCollection = $objectManager->create('Magento\Catalog\Model\ResourceModel\Product\CollectionFactory');
+$collection = $productCollection->create()
+            ->addAttributeToSelect('*')
+            ->addAttributeToFilter('used_in_quick_filter', 1)
+            ->load();
+
+?> 
+<div class="quickfilter">
+	<div class="quickfilter-left">
+		<?php echo __("Step One: Choose a Category"); ?>
+	</div>
+	<div class="quickfilter-right">
+		<span class="quickfilterteext"><?php echo __("Locate yout cartridge here: "); ?></span>
+		<select>
+			<option value=""><?php echo __("Please Select"); ?></option>
+			<?php 
+				foreach ($collection as $key=>$product){ ?>
+				 		<option value="<?php echo $product->getProductUrl(); ?>" class="options"><?php echo $product->getName(); ?></option>  
+				 	
+			<?php	}  
+		?>
+		</select>
+	</div> 
+</div>
+
+<script type="text/javascript">
+    require(['jquery'], function($){
+        $(".options").click(function(){
+        	var value = this.value; 
+        	window.location.href = value;
+        });           
+    }); 
+</script> 

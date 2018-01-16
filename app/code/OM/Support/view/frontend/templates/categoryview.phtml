@@ -1,0 +1,36 @@
+<?php  
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$brandId = $this->getRequest()->getParam('id'); 
+$models = $this->getBrandModels($brandId);
+$categorymodel = $this->getCategorymodel($brandId);
+$storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+$baseUrl = $storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_WEB);
+?>
+<div class="block" id="subcategories">
+	
+    <div class="block support subcategories-list">			
+		<?php
+		if($models->count() > 0):
+			foreach($models as $model):				
+				$image = $model->getImage() != '' ? $model->getImage() : 'support/support-default.png';
+			?>
+				<div class="item">
+					<div class="brand-item">
+						<div class="brand-image">
+							<a class="category_name" href="<?php echo $this->getUrl().'support/product/view/id/'.$model->getId().'/m/'.$brandId; ?>">
+								<h3><span><?php echo $model->getSupportTitle(); ?></span></h3>
+								<span class="subcategories-img">
+							   	<img src="<?php echo $baseUrl.'pub/media/'.$image; ?>" class="img-responsive support_image" alt="<?php echo $model->getSupportTitle(); ?>" /></span>
+							   	<span class="support-description">
+							   		<?php echo $model->getSupportDesc(); ?> 
+							   	</span>
+							</a>
+						</div>
+					</div> 
+				</div>
+			<?php endforeach; ?>
+		<?php else: ?>
+			<p>No Support Available!</p>
+		<?php endif; ?>
+    </div>
+</div> 

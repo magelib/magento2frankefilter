@@ -1,0 +1,60 @@
+<?php
+	$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $categories = $this->getSupportCategories();    
+	$storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+	$baseUrl = $storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_WEB);
+?>
+<div class="support">	
+	<div class="block brands-list" id="top_brands">          
+		<div class="block brands-list">			
+			<?php echo $this->getChildhtml('support-faqs') ?>	
+			<h2 class="supportcat-title"><?php echo __("Customer Support"); ?></h2>
+			<h3><?php  echo __("We're here to help. Get started by selecting your tap type below."); ?></h3>
+			<?php
+			$thumbnail_path = $baseUrl.'pub/media/catalog/category/';
+			foreach($categories as $category): 
+				$cat = $this->getCategorymodel($category->getId());
+				$thumbnail = $category->getData('image');
+				$subcategory = $objectManager->create('Magento\Catalog\Model\Category')->load($category->getId());
+				$subcats = $subcategory->getChildrenCategories(); 
+				if(count($subcats)>0)
+				{
+					$url = $this->getUrl().'support/brandmodels/category/id/'.$category->getId(); 
+				}
+				else
+				{
+					$url = $this->getUrl().'support/brandmodels/view/id/'.$category->getId(); 
+				}
+
+				$categoryurl = $category->getUrl();
+				$categoryredirecturl = substr(trim($categoryurl), 0, -5); 
+			
+			 ?>
+			<div class="supportcategory-container">
+				<?php if($thumbnail != ''): ?>
+					<div class="item">
+						<div class="brand-item">
+								<div class="brand-image">
+									<a class="category_name" href="<?php echo $categoryredirecturl; ?>">
+									   <img src="<?php echo $thumbnail_path.$thumbnail; ?>" class="img-responsive category_image" alt="<?php echo $cat->getName(); ?>" />
+									</a>
+								</div>
+						</div>
+					</div>
+				<?php endif; ?>
+					<div class="supportcat-name">
+						<a class="category_name" href="<?php echo $categoryredirecturl; ?>">
+							<span><?php echo $category->getName(); ?></span>
+						</a>
+					</div>
+					<div class="supportcat-description">
+						<span><?php echo $category->getDescription(); ?></span>
+					</div>
+			</div>
+			<?php endforeach; ?>
+		</div>
+		<div class="bottom-supportsection">
+			<?php echo $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('support-list-block')->toHtml();?>
+		</div>
+	</div>
+</div>

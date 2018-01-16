@@ -1,0 +1,10 @@
+<?xml version="1.0"?> 
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+   <update handle="formkey"/>
+   <update handle="support_support_grid_block"/>
+   <body>
+	   <referenceContainer name="content">
+		   <block class="OM\Support\Block\Adminhtml\Support"  name="om_support_support.grid.container" />
+	   </referenceContainer>
+   </body>
+</page>

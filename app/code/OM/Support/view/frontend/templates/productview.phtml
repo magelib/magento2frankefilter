@@ -1,0 +1,132 @@
+<?php  
+$id = $this->getRequest()->getParam('id'); 
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$product = $this->getSupportProduct($id);
+$faqdata = $objectManager->get("OM\Faq\Model\FaqFactory");
+$faqdatacollection = $faqdata->create()->getCollection() 
+						->addFieldToFilter('status',1)
+						->addFieldToFilter('faqcategory',$id);
+$mediapath = $this->getMediaUrl();
+$faqlistCollection = $faqdatacollection->getData(); 
+$storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+$baseUrl = $storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_WEB);
+
+?>
+<div class="support-product">
+	<div class="product-support">
+		<div class="productsupportleft">
+			<h1><?php echo $product->getSupportTitle() ?></h1>
+			<p><?php echo $product->getSupportShortDesc(); ?></p>
+		</div>
+		<div class="product-supportright">
+			<img src="<?php echo $baseUrl.'pub/media/'.$product->getImage(); ?>" class="img-responsive support_image" alt="<?php echo $product->getSupportTitle(); ?>" />
+		</div>
+	</div>
+
+	<div class="tab">
+	  <button class="tablinks" id="faqtab" onclick="openCity(event, 'faq')">Faq</button>
+	  <button class="tablinks" id="userguidetab" onclick="openCity(event, 'userguide')">User Guides</button>
+	  <button class="tablinks" id="videotab" onclick="openCity(event, 'video')">Video</button>
+	</div> 
+
+	<div class="faqpdf-videos">
+		<div id="faq" class="tabcontent">
+				<?php if(count($faqlistCollection)>0) { ?>
+				<?php
+				foreach($faqlistCollection as $faq)
+				{ ?>
+				 	<div class="accordion">
+				 		<div class="accordion-section">
+				 			<a class="accordion-section-title" href="<?php echo '#accordion-'.$faq['id']; ?>"><?php echo $faq['title']; ?></a>
+				 			<div id="<?php echo 'accordion-'.$faq['id']; ?>" class="accordion-section-content">
+				 				<div class="faqcontentimage">
+				 					<?php 
+				 					if($faq['image'])
+				 					{ ?>
+				 						<img src="<?php echo $mediapath.$faq['image']; ?>" alt="faq  image">
+				 					<?php } ?> 
+				 				</div>
+				 				<div class="faqcontent">
+									<p><?php echo $faq['text']; ?></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				<?php } ?>  
+				<?php } else { ?>
+						<p><?php echo "There is no faqs."; ?></p> 
+				<?php } ?>  
+		</div>  
+		<div id="userguide" class="tabcontent" style="display:none">
+			<?php if($product->getSupportPdf() != ''){ ?>
+			<div class="pdf">
+				<div class="pdf_url"></div>
+				<div class="pdf_name"><a target="_blank" href="<?php echo $this->getUrl().'pub/media/'. $product->getSupportPdf() ?>"><?php echo $product->getSupportPdfName() ?></a></div>
+			</div>
+			<?php } if($product->getSupportPdfTwo() != ''){ ?>
+			<div class="pdf">
+				<div class="pdf_url"></div>
+				<div class="pdf_name"><a target="_blank" href="<?php echo $this->getUrl().'pub/media/'.$product->getSupportPdfTwo() ?>"><?php echo $product->getSupportPdfNameTwo() ?></a></div>
+			</div>
+			<?php } ?> 
+		</div>
+		<div id="video" class="tabcontent" style="display:none">
+			<?php 	
+				if($product->getSupportVideo() != ''){ 
+				$video_string = $product->getSupportVideo();
+				$video_arr = explode(',', $video_string);
+				foreach ($video_arr as $video) {
+			?>
+				<div class="video">
+					<iframe width="100%" height="218px" src="https://www.youtube.com/embed/<?php echo $video;?>" frameborder="0" allowfullscreen></iframe> 
+				</div>
+			<?php
+				}
+		} else { ?>
+		<div class="video-text"><?php echo __("There is no video available"); ?></div>
+		<?php } ?>
+		</div> 
+	</div>
+</div>
+
+<script>
+
+require(['jquery', 'jquery/ui'], function($){ 
+    $(document).ready(function() {
+    	$("#faqtab").trigger('click');   
+    });  
+
+    $(document).ready(function() {
+		function close_accordion_section() {
+			$('.accordion .accordion-section-title').removeClass('active');
+			$('.accordion .accordion-section-content').slideUp(300).removeClass('open');
+		}
+
+		$('.accordion-section-title').click(function(e) {
+			var currentAttrValue = $(this).attr('href');
+			if($(e.target).is('.active')) {
+				close_accordion_section();
+			}else {
+				close_accordion_section();
+				$(this).addClass('active');
+				$('.accordion ' + currentAttrValue).slideDown(300).addClass('open'); 
+			}
+			e.preventDefault();
+		});
+	});   
+});  
+
+function openCity(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    //evt.currentTarget.className += " active";
+}
+</script>

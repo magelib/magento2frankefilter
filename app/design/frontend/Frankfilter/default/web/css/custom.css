@@ -1,0 +1,14 @@
+.navigation{ width: 36% !important; }
+.page-products .toolbar .limiter { display:block; }
+
+.custom-toolbarsection .toolbar .toolbar-products .field .limiter { display:none; } 
+
+.page-with-filter .toolbar-amount{ display:none; } 
+
+.toolbar-products .pages{ display:block; }
+
+.block-cart-failed .actions.main .continue, .block-cart-failed .actions.main .clear, .cart-container .form-cart .actions.main .continue, .cart-container .form-cart .actions.main .clear{ display:block; } 
+
+.cart-container .cart-discount{ 	display:none; } 
+
+#block-shipping{ display:none; } 

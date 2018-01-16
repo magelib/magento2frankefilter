@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page layout="3columns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="default_head_blocks"/>
+    <head>
+        <!-- <title>Franke Filterflow | Official UK retailer of approved products and spare parts</title> -->
+        <css src="css/custom.css"/> 
+    </head>
+    <body>
+        <referenceBlock name="header.links" remove="true"/>
+        <referenceBlock name="footer" remove="true"/>
+        <referenceContainer name="header.panel">
+        	<block class="Magento\Cms\Block\Block" name="top-head-first" cacheable="false">
+                <arguments>
+                    <argument name="block_id" xsi:type="string">top-head-first</argument>
+                </arguments>
+            </block>
+            <block class="Magento\Cms\Block\Block" name="top-head-second" cacheable="false">
+                <arguments>
+                    <argument name="block_id" xsi:type="string">top-head-second</argument>
+                </arguments>
+            </block>
+
+            <block class="Magento\Framework\View\Element\Template" name="loggedout" template="Magento_Theme::loggedout.phtml"/>
+
+        </referenceContainer>
+
+
+
+        <move element="top.search" destination="header.panel" before="loggedout"/> 
+
+        <move element="store.menu" destination="header-wrapper" after="logo"/> 
+    </body>
+</page> 

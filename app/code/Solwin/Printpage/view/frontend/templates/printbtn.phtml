@@ -1,0 +1,48 @@
+<?php
+/**
+ * Solwin Infotech
+ * Solwin Product Print Page
+ * 
+ * @category   Solwin
+ * @package    Solwin_Printpage
+ * @copyright  Copyright © 2006-2016 Solwin (https://www.solwininfotech.com)
+ * @license    https://www.solwininfotech.com/magento-extension-license/
+ */
+?>
+<?php
+$helper = $this->helper('Solwin\Printpage\Helper\Data');
+$_product = $block->getProduct();
+$pid = $_product->getEntityId();
+
+$printurl = $helper->getPrintUrl() . 'id/' . $pid;
+?>
+
+<div class="prodLink demi"><a id="bookmarkme" href="#" rel="sidebar">Bookmark This Page</a></div>
+
+<div class="btn-print">
+    <a class="action primary" href="<?php echo $printurl; ?>" target="_blank"><?php echo __('Print This Page'); ?></a>
+</div>
+
+<script type="text/javascript">
+	require(['jquery'], function($){
+		function CreateBookmarkLink(){
+		var title = document.title;
+		var url = document.location.href;
+		 
+		if(window.sidebar){
+		/* Mozilla Firefox Bookmark */
+		window.sidebar.addPanel(title, url, "");
+		}else if(window.external){
+		/* IE Favorite */
+		window.external.AddFavorite(url, title);
+		}else if(window.opera && window.print) {
+		/* Opera Hotlist */
+		alert("Press Control + D to bookmark");
+		return true;
+		}else{
+		/* Other */
+		alert("Press Control + D to bookmark");
+		}
+		}
+	});
+</script>

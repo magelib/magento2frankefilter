@@ -1,0 +1,13 @@
+<?php
+$enable 	= $this->helper('OM\Support\Helper\Data')->getConfig('support_config/general/enable_in_frontend');
+$supportheading = $this->helper('OM\Support\Helper\Data')->getConfig('support_config/general/support_heading'); 
+?>
+<?php if($enable==1) { ?>
+	<div id="custom-top-links-right-block" class="toplinks">
+		<ul>
+			<li class="support"><a href="<?php echo $this->getUrl('support'); ?>">
+				<?php echo $supportheading; ?></a>
+			</li>
+		</ul>
+	</div>
+<?php } ?>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+ <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="../../../../../../
+../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+	<body>
+		<referenceContainer name="left">
+			<block class="OM\Productregistration\Block\Adminhtml\Productregistration\Edit\Tabs"
+				name="om_productregistration_productregistration.edit.tabs"/>
+		</referenceContainer>
+		<referenceContainer name="content">
+			<block class="OM\Productregistration\Block\Adminhtml\Productregistration\Edit"
+				name="om_productregistration_productregistration.edit"/>
+		</referenceContainer>
+	</body>
+</page> 

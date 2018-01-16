@@ -1,0 +1,153 @@
+<?php
+/**
+ * Solwin Infotech
+ * Solwin Product Print Page
+ * 
+ * @category   Solwin
+ * @package    Solwin_Printpage
+ * @copyright  Copyright © 2006-2016 Solwin (https://www.solwininfotech.com)
+ * @license    https://www.solwininfotech.com/magento-extension-license/
+ */
+?>
+<?php 
+/**
+ * Get helper for additional informations
+ */
+$helper = $this->helper('Solwin\Printpage\Helper\Data');
+$_helper = $this->helper('Magento\Catalog\Helper\Output');
+$_product = $this->getPrintProduct();
+
+$logo = $this->getLogoUrl(); //get header logo url
+$imgurl = $this->getBaseUrl() . 'pub/media/catalog/product';
+
+/**
+ * Get all information about product
+ */
+$name = $_product->getName();
+$typeId = $_product->getTypeId();
+$desc = $_product->getDescription();
+$sku = $_product->getSku();
+$price = $_product->getPrice();
+$img = $_product->getImage();
+$url = $_product->getProductUrl();
+$availability = $_product->getIsSalable();
+
+$enableadditionalnotes = $helper->getConfig('printsection/printgroup/show_additional_block');
+$additionalnotes = $helper->getConfig('printsection/printgroup/additional_note');
+$notestitle = $helper->getConfig('printsection/printgroup/title');
+
+$enableaddress = $helper->getConfig('printsection/printgroup/show_address');
+$addressnote = $helper->getConfig('printsection/printgroup/address_note');
+
+
+if ($img) {
+    $path = $imgurl . $img;
+} else {
+    $path = $this->helper('Solwin\Printpage\Helper\Data')->getPlaceHolderImg();
+}
+if($enableaddress){
+    $imgClass = "img-class";
+    $addClass = "add-class";
+}else{
+    $imgClass = "";
+    $addClass = "";
+}
+?>
+<div class="print-page-wrapper">
+    <div class="print-img" >
+        <div class="<?php echo $imgClass ?>">
+            <img src="<?php echo $logo; ?>" alt="logo">
+        </div>
+        
+        <?php if($enableaddress){ ?>
+        <div class="<?php echo $addClass ?>">
+            <?php echo $addressnote; ?>
+        </div>
+        <?php } ?>
+    </div>
+    <div class="print-prod-name">
+        <p><?php echo $name . " #" . $sku; ?></p>
+        <span><b><?php echo __('URL:');?> </b><a href="<?php echo $url; ?>"><?php echo $url; ?></a></span>
+    </div>
+    <div class="print-prod-type"> 
+        <h3><?php echo __('PRODUCT INFO');?></h3>
+    </div>
+    <div class="print-pro">
+        <div class="print-prod-img">
+            <img src="<?php echo $path; ?>" alt="<?php echo $name; ?>" height="" width="300" />
+        </div>
+        <div class="product-detail">
+            <h2>
+                <?php echo ucfirst($typeId) . ' : ' . $name; ?>
+            </h2>
+            <div class="desc">
+                <div class="inner-desc"><span>Availability:</span> <?php
+                    if ($_product->isAvailable()) {
+                        echo __('In Stock');
+                    } else {
+                        echo __('Out of Stock');
+                    }
+                    ?></div>
+                <div class="inner-desc"><span><?php echo __('SKU:');?></span> <?php echo $sku; ?></div>
+                <div class="inner-desc"><span><?php echo __('Price:');?></span><b> <?php echo $this->formatCurrency($price, 1); ?></b></div>
+                <?php //if ($desc) { ?>
+                   <!--  <div class="inner-desc">
+                        <span><?php //echo __('Description:');?></span> <p><?php //echo $desc; ?></p>
+                    </div> -->
+                <?php //} ?>
+            </div>
+        </div>
+    </div>
+
+    <div class="prdouctprintpagetab">
+        <div class="tabtitle">
+            <span class="description"><?php echo __("Description"); ?></span>
+            <span class="faqs"><?php echo __("FAQs"); ?></span>
+            <span class="reiew"><?php echo __("Rate & Review"); ?></span>
+        </div>
+        <div class="tabdescription">
+            <?php if ($desc) { ?>
+                <div class="description">
+                    <?php echo $desc; ?>
+                </div>
+            <?php } ?>
+            <div class="descriptionright">
+                <span class="installationguide"><?php echo __("Download Installation Guides"); ?></span>
+                <span class="bookmark"><?php echo __("Bookmark"); ?></span>
+                <span class="print"><?php echo __("Print This Page"); ?></span>
+            </div>
+        </div>
+    </div>
+    <?php if ($_additional = $this->getAdditionalData()) {
+        ?>
+        <div class="additional-info">
+            <div class="additional-attributes-wrapper table-wrapper">
+                <table class="data table additional-attributes" id="product-attribute-specs-table">
+                    <caption class="table-caption">
+                        <?php echo __('More Information') ?>
+                    </caption>
+                    <tbody>
+                        <?php foreach ($_additional as $_data): ?>
+                            <tr>
+                                <th class="col label" scope="row">
+                                    <?php echo $block->escapeHtml(__($_data['label'])) ?></th>
+                                <td class="col data" data-th="<?php echo $block->escapeHtml(__($_data['label'])) ?>">
+                                    <?php echo $_helper->productAttribute($_product, $_data['value'], $_data['code']) ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    <?php } ?>
+    <?php if ($enableadditionalnotes) { ?>
+        <div class="additional-notes">
+            <?php if (isset($additionalnotes)) { ?>
+                <b><?php echo $notestitle; ?> : </b><?php echo $additionalnotes; ?>
+            <?php } ?>
+        </div>
+    <?php } ?>
+</div>
+<script type="text/javascript">
+    window.print();
+</script>

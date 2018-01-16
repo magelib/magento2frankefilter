@@ -1,0 +1,81 @@
+<?php 
+$productregistrationcollection = $block->getCollection(); 
+$om = \Magento\Framework\App\ObjectManager::getInstance();
+$url = $this->getUrl("productregistration/index/index");
+
+?>
+
+<div class="wk-mp-design contra-amount-grid"> 
+	<fieldset class="fieldset info wk-mp-fieldset">
+		<?php if ($productregistrationcollection && count($productregistrationcollection)): ?>
+
+			<table cellspacing="0" class="border wk-mp-list-table wk-mp-list-container-table">
+				<thead>
+					<tr class="wk-content">
+						
+						<th class="wk-first-td">
+			    			<span class="label name">
+								<?php echo __('Product Name')?>
+							</span>
+		    			</th>   
+
+			    		<th class="wk-first-td">
+			    			<span class="label name">
+								<?php echo __('Product Tap')?>
+							</span>
+			    		</th>  
+
+			    		<th class="wk-first-td">
+			    			<span class="label name">
+								<?php echo __('Date of Purchase')?>
+							</span>
+			    		</th>
+
+						    		
+			    		<th>
+			    			<span class="label pro-status">
+								<?php echo __('Date of Install')?>
+							</span>
+			    		</th>
+
+			    		<th>
+			    			<span class="label pro-status">
+								<?php echo __('Purchased From')?>
+							</span>
+			    		</th>		
+					</tr>
+				</thead>
+				<tbody>
+			    <?php 
+			    	$i = 0;
+					foreach($productregistrationcollection as $productregistration){ 
+						?>
+				    	<tr class="wk-row-view <?php echo $class = ($i == count($block->getCollection()))? 'wk-last_tr':''?>"> 
+				    	 	<td><?php echo $productregistration->getProductname(); ?></td>
+				    	 	<td><?php echo $productregistration->getProducttap(); ?></td>
+				    	 	<td><?php echo $productregistration->getDateofpurchase(); ?></td>
+				    	 	<td><?php echo $productregistration->getDateofinstall(); ?></td> 
+				    	 	<td><?php echo $productregistration->getPurchasedfrom(); ?> </td>
+				    	</tr> 
+				    	<?php
+				    }?>
+			    </tbody>
+			</table>
+		<?php else: ?>
+			<div class="wk-emptymsg">
+				<?php echo __('No Product Available'); ?>
+			</div>
+		<?php endif ?>
+
+		<?php if ($block->getPagerHtml()): ?>
+   			 <div class="order-products-toolbar toolbar bottom"><?php echo $block->getPagerHtml(); ?></div>
+		<?php endif ?> 	
+
+		<div class="buttons-set">
+			<p class="back-link">
+				<a href="javascript:;" onclick="javascript: window.history.back();" class="left">« Back</a>
+			</p>
+		</div>
+	</fieldset> 
+</div>   
+

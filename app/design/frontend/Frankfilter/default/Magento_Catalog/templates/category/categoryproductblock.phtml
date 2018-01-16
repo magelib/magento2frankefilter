@@ -1,0 +1,35 @@
+<?php 
+   $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+   $category = $objectManager->get('Magento\Framework\Registry')->registry('current_category');//get current category
+   $categoryid = $category->getId(); 
+   $subcategory = $objectManager->create('Magento\Catalog\Model\Category')->load($categoryid);
+   $subcats = $subcategory->getChildrenCategories()->addAttributeToFilter("show_in_product_category",1);
+
+?>
+
+<?php if(count($subcats) > 0) { ?>
+<ul class="sub-cat">
+	<?php
+	foreach ($subcats as $subcat) {
+		$_category = $objectManager->create('Magento\Catalog\Model\Category')->load($subcat->getId());
+		$_outputhelper = $this->helper('Magento\Catalog\Helper\Output');
+		$subcaturl = $subcat->getUrl();
+		$_imgHtml = '';
+		if ($_imgUrl = $_category->getImageUrl()) {
+			$_imgHtml = '<img src="' . $_imgUrl . '" />';
+			$_imgHtml = $_outputhelper->categoryAttribute($_category, $_imgHtml, 'image');
+			/* @escapeNotVerified */
+
+		} ?>
+		
+		<li>
+			<div class="cat-image">
+				<a href="<?php echo $subcaturl ?>"><?php echo $_imgHtml;?></a>
+			</div>
+			<div class="cat-name">
+				<h4><a href="<?php echo $subcaturl ?>"><?php echo $subcat->getName(); ?></a></h4>
+			</div>
+		</li>
+	<?php } ?>
+</ul>
+<?php } ?>

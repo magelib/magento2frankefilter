@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Core/etc/config.xsd">
+	<default>
+		<faq_config>
+			<general>
+				<enable_in_frontend>0</enable_in_frontend>
+				<enable_in_sidebar_in_frontend>0</enable_in_sidebar_in_frontend>
+				<faq_heading>Customer Faqs</faq_heading>
+				<faq_block_position>1</faq_block_position>
+			</general>
+		</faq_config>
+	</default>
+</config>

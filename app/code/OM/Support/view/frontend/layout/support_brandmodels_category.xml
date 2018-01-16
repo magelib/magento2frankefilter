@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+	<body>
+		<referenceContainer name="content">
+			<block class="OM\Support\Block\SupportList"	name="om_support_category" template="OM_Support::category.phtml" >
+				<!-- <block class="Magento\Cms\Block\Block" name="support-faqs" before="title" >
+					<arguments>
+						<argument name="block_id" xsi:type="string">support-faqs</argument>
+					</arguments>	
+				</block> -->			
+			</block>
+		</referenceContainer>
+		<!-- <referenceContainer name="sidebar.additional">
+		 	<referenceBlock name="catalog.compare.sidebar" remove="true"/>
+		 	<referenceBlock name="wishlist_sidebar" remove="true" />
+			<block class="Magento\Cms\Block\Block" name="support-video" before="-" >
+					<arguments>
+						<argument name="block_id" xsi:type="string">support-video</argument>
+					</arguments>	
+			</block>	
+       </referenceContainer> -->
+	</body>
+</page>

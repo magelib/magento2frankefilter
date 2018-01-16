@@ -1,0 +1,13 @@
+<?php
+
+$brandId = $this->getRequest()->getParam('id'); 
+$models = $this->getBrandModels($brandId);
+$categorymodel = $this->getCategorymodel($brandId);
+
+?>
+
+<?php if($categorymodel->getCustomDescription()) { ?>
+	<div class="category-topdescription">
+		<?php echo $categorymodel->getCustomDescription(); ?>
+	</div>
+<?php } ?>

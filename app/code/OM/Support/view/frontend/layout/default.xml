@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="3columns" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+   <head>	 
+	  <css src="OM_Support::css/support.css" />	
+	  <css src="OM_Support::css/jquery.mCustomScrollbar.min.css"/>
+   </head>
+    <body>  
+      <referenceContainer name="sidebar.additional">
+          <referenceBlock name="sale.reorder.sidebar" remove="true"/>
+      </referenceContainer>
+    </body>
+</page>

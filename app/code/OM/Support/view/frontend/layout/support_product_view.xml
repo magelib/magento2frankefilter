@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+	<head>
+		<script src="OM_Support::js/jquery.min.js"/> 
+	</head>
+	<body>
+		<!-- <referenceContainer name="sidebar.main">
+			<referenceBlock name="catalog.compare.sidebar" remove="true"/>
+			 	<referenceBlock name="wishlist_sidebar" remove="true" />
+	        <block class="OM\Support\Block\View" name="support.left" before="-" template="OM_Support::productview_left.phtml" />
+       </referenceContainer> -->
+		<referenceContainer name="content">
+			<block class="OM\Support\Block\View" name="om_support_view" template="OM_Support::productview.phtml"/>
+		</referenceContainer>	
+	</body>
+</page> 

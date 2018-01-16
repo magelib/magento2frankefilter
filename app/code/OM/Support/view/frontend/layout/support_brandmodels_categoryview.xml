@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">	
+	<!-- <update handle="testmonial_testmonial" /> -->
+	<body>
+		<referenceContainer name="columns.top">
+			<block class="OM\Support\Block\SupportList"	name="om_support_categorydescription" template="OM_Support::categoryviewtop.phtml" />
+		</referenceContainer>
+		<referenceContainer name="sidebar.additional">
+		 	<referenceBlock name="catalog.compare.sidebar" remove="true"/>
+		 	<referenceBlock name="wishlist_sidebar" remove="true" />
+		 	<block class="OM\Support\Block\SupportList"	name="om_support_viewimage" template="OM_Support::categoryviewright.phtml" />
+        </referenceContainer>
+		<referenceContainer name="content">
+			<block class="OM\Support\Block\SupportList"	name="om_support_view" template="OM_Support::categoryview.phtml" />
+		</referenceContainer>
+		
+	</body>
+</page> 

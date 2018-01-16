@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Catalog\Block\Breadcrumbs" type="OM\Override\Block\Breadcrumbs" />
+    <preference for="Magento\Review\Block\Product\Review" type="OM\Override\Block\Product\Review" />
+    <preference for="Magento\Customer\Block\Form\Login" type="OM\Override\Block\Form\Login" />
+    <preference for="Magento\Customer\Block\Form\Register" type="OM\Override\Block\Form\Register" />
+</config> 

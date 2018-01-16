@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+ 
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Backend/etc/menu.xsd">
+	<menu>
+		<add 
+		id="OM_Faq::main_menu" 
+		title="Faq" 
+		module="OM_Faq" 
+		sortOrder="20" 
+		resource="OM_Faq::faq" 
+		/>
+		<add 
+		id="OM_Faq::add_faq" 
+		title="Add Faq" 
+		module="OM_Faq" 
+		sortOrder="1" 
+		parent="OM_Faq::main_menu" 
+		action="faq/faq/new" 
+		resource="OM_Faq::manage_faq" 
+		/>
+		<add 
+		id="OM_Faq::manage_faq" 
+		title="Manage Faq" 
+		module="OM_Faq" 
+		sortOrder="2" 
+		parent="OM_Faq::main_menu" 
+		action="faq/faq/index" 
+		resource="OM_Faq::manage_faq" 
+		/>
+		<!-- <add 
+		id="OM_Faq::category_faq" 
+		title="Add Faq Group" 
+		module="OM_Faq" 
+		sortOrder="3" 
+		parent="OM_Faq::main_menu" 
+		action="faq/faqcategory/index" 
+		resource="OM_Faq::addcategory_faq" 
+		/> --> 
+
+		<!-- <add 
+		id="OM_Faq::category_faq" 
+		title="Faq Group" 
+		module="OM_Faq" 
+		sortOrder="3" 
+		parent="OM_Faq::main_menu" 
+		action="faq/faq/category" 
+		resource="OM_Faq::category_faq" 
+		/> -->
+		<add 
+		id="OM_Faq::configuration" 
+		title="Configurations" 
+		module="OM_Faq" 
+		sortOrder="4" 
+		parent="OM_Faq::main_menu" 
+		action="adminhtml/system_config/edit/section/faq" 
+		resource="OM_Faq::configuration" 
+		/>
+	</menu>
+</config>

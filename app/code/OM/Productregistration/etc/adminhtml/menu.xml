@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+ 
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Backend/etc/menu.xsd">
+	<menu>
+		<add 
+		id="OM_Productregistration::main_menu" 
+		title="Productregistration" 
+		module="OM_Productregistration" 
+		sortOrder="20" 
+		resource="OM_Productregistration::productregistration" 
+		/>
+		<add 
+		id="OM_Productregistration::manage_productregistration" 
+		title="Productregistration Report" 
+		module="OM_Productregistration" 
+		sortOrder="2" 
+		parent="OM_Productregistration::main_menu" 
+		action="productregistration/productregistration/index" 
+		resource="OM_Productregistration::manage_productregistration" 
+		/>
+	
+	</menu>
+</config>

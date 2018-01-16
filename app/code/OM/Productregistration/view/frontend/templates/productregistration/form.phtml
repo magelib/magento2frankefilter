@@ -1,0 +1,576 @@
+<?php
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+
+
+
+<script>
+
+</script>
+<?php
+/**
+ * Create account form template
+ *
+ * @var $block \Magento\Customer\Block\Productregistration
+ */
+?>
+<?php
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $session = $objectManager->create('Magento\Customer\Model\Session');
+    $customerSession = $objectManager->get('Magento\Customer\Model\Session');
+	$customerData = $customerSession->getCustomer();
+	$storeManager = $objectManager->get('Magento\Store\Model\StoreManagerInterface'); 
+	$currentStore = $storeManager->getStore();
+	$mediaUrl = $currentStore->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);   
+
+	if($customerData->getFirstname())
+	{
+		$firstname = $customerData->getFirstname();
+	}
+	else
+	{
+		$firstname = $customerData->getFirstName();
+	}
+
+	if($customerData->getLastname())
+	{
+		$lastname = $customerData->getLastname();
+	}
+	else
+	{
+		$lastname = $customerData->getLastName();
+	}
+
+?>
+
+
+<?php $_dob = $block->getLayout()->createBlock('Magento\Customer\Block\Widget\Dob') ?>
+<?php if ($_dob->isEnabled()): ?>
+    <?= $_dob->setDate($block->getFormData()->getDob())->toHtml() ?>
+<?php endif ?>
+
+<div class="business-main">
+	<form class="form create account form-create-account" name="form-create-account" action="<?php /* @escapeNotVerified */ echo $block->getPostActionUrl() ?>" method="post" id="form-validate" enctype="multipart/form-data" autocomplete="off">
+	    <div id="element">
+	        <div data-role="collapsible" class="colapsible trigger_title" id="contact-person">
+	            <div data-role="trigger">
+	                <span class="tab_title"><?php /* @escapeNotVerified */ echo __('New Customer Details')?></span>
+	                <span class="caret"></span>
+	            </div>
+	        </div>
+
+	        <input type="hidden" name="create_address" value="1" />
+
+	        <div data-role="content" class="colapsible-content" id="contact-person-content">
+	            <fieldset class="fieldset create info">
+	            	<div class="productregistrationformleft">
+
+	            		<div class="field field-name-firstname required">
+			                <label class="label required"><em>*</em><?php  /* @escapeNotVerified */ echo __('Title');?></label>
+			                <?php if(($customerSession->isLoggedIn()) && ($customerData->getPrefix()!="")) { ?>
+			                <div class="control">
+			                    <select name="prefix" class="prefix" required>
+			                        <option value="<?php echo $customerData->getPrefix(); ?>"><?php echo $customerData->getPrefix(); ?></option>
+			                    </select> 
+			                </div>
+
+			                <input type="hidden" class="prefixhidden" name="prefix" value="<?php echo $customerData->getPrefix(); ?>" /> 
+
+			                <?php } else { ?>
+			                 <div class="control">
+			                    <select name="prefix" class="prefix" required>
+			                        <option value=""><?php echo __("--Select--"); ?></option>
+			                        <option value="Mr" <?php if($block->escapeHtml($block->getFormData()->getPrefix())=='Mr'){ echo "selected=selected";}?>><?php echo __("Mr"); ?></option>
+			                        <option value="Mrs" <?php if($block->escapeHtml($block->getFormData()->getPrefix())=='Mrs'){ echo "selected=selected";}?>><?php echo __("Mrs"); ?></option>
+			                        <option value="Miss" <?php if($block->escapeHtml($block->getFormData()->getPrefix())=='Miss'){ echo "selected=selected";}?>><?php echo __("Miss"); ?></option>
+			                        <option value="Ms" <?php if($block->escapeHtml($block->getFormData()->getPrefix())=='Ms'){ echo "selected=selected";}?>><?php echo __("Ms"); ?></option>
+			                        <option value="Dr" <?php if($block->escapeHtml($block->getFormData()->getPrefix())=='Dr'){ echo "selected=selected";}?>><?php echo __("Dr"); ?></option>
+			                    </select> 
+			                </div>
+
+			                <input type="hidden" class="prefixhidden" name="prefix" value="" /> 
+
+			                <?php } ?> 
+
+			                
+		            	</div> 
+		                <div class="field field-name-firstname required">
+		                    <label class="label required"><em>*</em><?php  /* @escapeNotVerified */ echo __('First Name');?></label>
+		                    <?php if(!$customerSession->isLoggedIn()) { ?>
+		                    <div class="control">
+		                        <input id="firstname" name="firstname" value="<?php echo $block->escapeHtml($block->getFormData()->getFirstname()) ?>" title="First name" required="" class="input-text floating-input required-entry" data-validate="{required:true}" autocomplete="off" aria-required="true" type="text" placeholder=" ">
+		                    </div>
+		                    <?php } else { ?>
+		              		<div class="control">
+		                        <input id="firstname" name="firstname" value="<?php echo $firstname; ?>" title="First name" required="" class="input-text floating-input required-entry" data-validate="{required:true}" autocomplete="off" aria-required="true" type="text" placeholder=" " readonly>
+		                    </div>
+		                    <?php } ?>
+		                </div>
+		                <div class="field field-name-lastname required">
+		                    <label class="label required"><em>*</em><?php  /* @escapeNotVerified */ echo __('Last Name');?></label>
+		                    <?php if(!$customerSession->isLoggedIn()) { ?>
+		                    <div class="control">
+		                        <input id="lastname" name="lastname" value="<?php echo $block->escapeHtml($block->getFormData()->getLastname()) ?>" title="Last Name" required="" class="floating-input input-text required-entry" data-validate="{required:true}" autocomplete="off" aria-required="true" type="text" placeholder=" ">
+		                    </div>
+		                    <?php } else { ?>
+		                    <div class="control">
+		                        <input id="lastname" name="lastname" value="<?php echo $lastname; ?>" title="Last Name" required="" class="floating-input input-text required-entry" data-validate="{required:true}" autocomplete="off" aria-required="true" type="text" placeholder=" " readonly>
+		                    </div>
+		                    <?php } ?>
+		                </div> 
+		                <div class="field">
+			                <label class="label"><?php  /* @escapeNotVerified */ echo __('Company');?></label>
+			                <div class="control">
+			                    <input id="companyname" name="company" value="<?php echo $block->escapeHtml($block->getFormData()->getCompany()) ?>" title="Company Name" class="input-text floating-input" autocomplete="off" type="text" placeholder=" ">
+			                </div>
+		            	</div>
+		            	<?php $_streetValidationClass = $this->helper('Magento\Customer\Helper\Address')->getAttributeValidationClass('street'); ?>
+				        <div class="field street required">
+				            <label for="street_1" class="label required"><em>*</em>
+				                <span><?= $block->escapeHtml(__('Street Address')) ?></span>
+				            </label>
+				            <div class="control">
+				                <input type="text"
+				                       name="street[]"
+				                       value="<?= $block->escapeHtmlAttr($block->getFormData()->getStreet(1)) ?>"
+				                       title="<?= $block->escapeHtmlAttr(__('Street Address')) ?>"
+				                       id="street_1"
+				                       class="input-text <?= $block->escapeHtmlAttr($_streetValidationClass) ?>"/>
+
+				                <label for="street_1" class="label">
+					                <span><?= $block->escapeHtml(__('Address2')) ?></span>
+					            </label>
+
+				                <div class="nested">
+				                    <?php $_streetValidationClass = trim(str_replace('required-entry', '', $_streetValidationClass)); ?>
+				                    <?php for ($_i = 1, $_n = $this->helper('Magento\Customer\Helper\Address')->getStreetLines(); $_i < $_n; $_i++): ?>
+				                        <div class="field additional">
+				                            <label class="label" for="street_<?= /* @noEscape */ $_i + 1 ?>">
+				                                <span><?= $block->escapeHtml(__('Street Address %1', $_i + 1)) ?></span>
+				                            </label>
+				                            <div class="control">
+				                                <input type="text" name="street[]"
+				                                       value="<?= $block->escapeHtmlAttr($block->getFormData()->getStreet($_i + 1)) ?>"
+				                                       title="<?= $block->escapeHtmlAttr(__('Street Address %1', $_i + 1)) ?>"
+				                                       id="street_<?= /* @noEscape */ $_i + 1 ?>"
+				                                       class="input-text <?= $block->escapeHtmlAttr($_streetValidationClass) ?>">
+				                            </div>
+				                        </div>
+				                    <?php endfor; ?>
+				                </div>
+				            </div>
+				        </div>
+			            <div class="field city">
+				            <label class="label required" for="city"><em>*</em><span><?= $block->escapeHtml(__('City')) ?></span></label>
+				            <div class="control">
+				                <input type="text"
+				                       name="city"
+				                       value="<?= $block->escapeHtmlAttr($block->getFormData()->getCity()) ?>" required
+				                       title="<?= $block->escapeHtmlAttr(__('City')) ?>"
+				                       class="input-text"
+				                       id="city">
+				            </div>
+				        </div>
+		            	
+				         <div class="field region required">
+			                <label for="region_id" class="label required"><em>*</em><span><?= $block->escapeHtml(__('State/Province')) ?></span></label>
+			                <div class="control">
+			                    <select id="region_id" name="region_id" title="<?= $block->escapeHtmlAttr(__('State/Province')) ?>" class="validate-select" style="display:none;">
+			                        <option value=""><?= $block->escapeHtml(__('Please select a region, state or province.')) ?></option>
+			                    </select>
+			                    <input type="text" id="region" name="region" value="<?= $block->escapeHtml($block->getRegion()) ?>" title="<?= $block->escapeHtmlAttr(__('State/Province')) ?>" required class="input-text <?= $block->escapeHtmlAttr($this->helper('Magento\Customer\Helper\Address')->getAttributeValidationClass('region')) ?>" style="display:none;">
+			                </div>
+			            </div>
+
+		            	<div class="field zip">
+				            <label class="label required" for="zip"><em>*</em>
+				                <span><?= $block->escapeHtml(__('Zip/Postal Code')) ?></span>
+				            </label>
+				            <div class="control">
+				                <input type="text"
+				                       name="postcode"
+				                       value="<?= $block->escapeHtmlAttr($block->getFormData()->getPostcode()) ?>"
+				                       title="<?= $block->escapeHtmlAttr(__('Zip/Postal Code')) ?>"
+				                       id="zip" required
+				                       class="input-text validate-zip-international <?= $block->escapeHtmlAttr($this->helper('Magento\Customer\Helper\Address')->getAttributeValidationClass('postcode')) ?>">
+				            </div>
+				        </div>
+				        <div class="field country required">
+				            <label class="label required" for="country"><em>*</em><span><?= $block->escapeHtml(__('Country')) ?></span></label>
+				            <div class="control">
+				                <?= $block->getCountryHtmlSelect() ?>
+				            </div>
+				        </div> 
+	            	</div>  
+
+	            	<div class="productregistrationformright">
+	            		<div class="field field-name-phone required">
+	                        <label class="label required"><em>*</em><?php /*/* @escapeNotVerified */ echo __('Telephone') ?></label>
+		                    <div class="control">
+		                        <input type="text" name="telephone" id="telephone" value="<?php echo $block->escapeHtml($block->getFormData()->getTelephone()) ?>" required="" title="<?php /*/* @escapeNotVerified */ echo __('Phone Number') ?>" class="floating-input input-text <?php /*/* @escapeNotVerified */ echo $this->helper('Magento\Customer\Helper\Address')->getAttributeValidationClass('telephone') ?>" placeholder=" ">
+		                    </div>
+		                </div>
+	            		<div class="field required">
+	                        <label class="label required"><em>*</em><?php  /* @escapeNotVerified */ echo __('Email Address')?></label>
+	                        <?php if(!$customerSession->isLoggedIn()) { ?>
+		                    <div class="control">
+		                        <input type="text" name="email" autocomplete="email" id="emailid" value="<?php echo $block->escapeHtml($block->getFormData()->getEmail()) ?>" title="<?php /* @escapeNotVerified */ echo __('Email') ?>" class="floating-input input-text" data-validate="{required:true, 'validate-email':true}" required placeholder=" ">
+		                    </div>
+		                    <?php } else { ?>
+		                    <div class="control">
+		                        <input type="text" name="email" autocomplete="email" id="emailid" value="<?php echo $customerData->getEmail(); ?>" title="<?php /* @escapeNotVerified */ echo __('Email') ?>" class="floating-input input-text" required placeholder=" " readonly>
+		                    </div>
+		                    <input type="hidden" name="customerid" value="<?php echo $customerData->getId(); ?>" />
+		                    <?php } ?> 
+		                </div> 
+
+		                <div class="field required" tabindex="14">
+	                        <label for="product" class="required"><em>*</em><?php echo __('Select Product') ?></label>
+	                        <div class="input-box"  >
+	                            <span class="select"  id="product_placeholder_product" name="product">--Select--</span>
+								<input type="hidden"  name="productname" id="hiddenfield-product" class="required-entry" value="" />
+							 </div>  
+	                    </div>
+
+	                    <?php echo $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('product-registration-selectproduct-dropdown')->toHtml();?>
+
+                      	<div class="boiler-tank-selectTap">
+						 	<div class="selectTap" id="selectTap" tabindex="15">
+		                        <label for="product_tap" class="required"><em>*</em><?php echo __('Select Tap') ?></label>
+		                        <div class="input-box">
+									<input type="hidden" name="producttap" id="hiddenfield-product_tap" class="required-entry" value="" />
+		                            <span class="select" id="product_placeholder_tap" name="product_tap" >Select your Tap</span>
+		                        </div>
+					 		</div>
+                    	</div>
+
+                    	<?php echo $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('product-registration-producttap-dropdown')->toHtml();?>
+                    	
+                        <div class="boiler-tank">
+					        <label for="serialnumber" class="required"><em>*</em><?php echo __('Boiler Tank Serial Number') ?></label>
+					        <div class="input-box">
+					            <input type="text" id="serialnumber" tabindex="5" name="serialnumber" onblur="checkLength(this)" value="<?php echo $this->escapeHtml($this->getFormData()->getSerialnumber()) ?>" title="<?php echo __('Serial Number') ?>" class="input-text required-entry" />
+					            <span class="boiltankserialnumberlength" style="display:none">
+					            	<?php echo __("Length should be between 6 to 12"); ?>
+					            </span>
+					        </div> 
+
+					        <div class="boilertankimages">
+					        	<span class="boilertankimagetext"><?php echo __("Where's my tank's serial no?"); ?></span>
+					        	<div class="images">
+						        	<img class="boilertankimagefirst" id="boilertankimagefirst" src="<?php echo $mediaUrl.'productregistration/MinervaTank.png'; ?>" alt="MinervaTank">
+						        	<img class="boilertankimagesecond" id="boilertankimagesecond" src="<?php echo $mediaUrl.'productregistration/OMNITank.png'; ?>" alt="OmniTank">
+					        	</div>
+					        </div>
+					    </div>
+ 
+		                <div class="field required">
+	                        <label class="label required"><em>*</em><?php  /* @escapeNotVerified */ echo __('Purchased From')?></label>
+		                    <div class="control">
+		                        <input type="text" name="purchasedfrom" autocomplete="email" id="purchasedfrom" value="<?php echo $block->escapeHtml($block->getFormData()->getPurchasedfrom()) ?>" title="<?php /* @escapeNotVerified */ echo __('Purchased From') ?>" class="floating-input input-text" data-validate="{required:true, 'validate-purchasedfrom':true}" required placeholder=" ">
+		                    </div>
+		                </div> 
+		                <div class="field required">
+	                        <label class="label required"><em>*</em><?php  /* @escapeNotVerified */ echo __('Date of Purchase')?></label>
+		                    <div class="control">
+                            <input type="text" name="dateofpurchase" autocomplete="email" id="dateofpurchase" value="<?php echo $block->escapeHtml($block->getFormData()->getDateofpurchase()) ?>" title="<?php /* @escapeNotVerified */ echo __('Date of Purchase') ?>" class="floating-input nocustomval input-text" data-validate="{required:true, 'validate-purchasedfrom':true}" required placeholder=" ">
+		                    </div>
+		                </div> 
+		                <div class="field required">
+	                        <label class="label required"><em>*</em><?php  /* @escapeNotVerified */ echo __('Date of Install:')?></label>
+		                    <div class="control">
+                            <input type="text" name="dateofinstall" autocomplete="email" id="dateofinstall" value="<?php echo $block->escapeHtml($block->getFormData()->getDateofinstall()) ?>" title="<?php /* @escapeNotVerified */ echo __('Date of Install') ?>" class="floating-input nocustomval input-text" data-validate="{required:true, 'validate-purchasedfrom':true}" required placeholder=" ">
+		                    </div> 
+		                </div> 
+		                <?php if(!$customerSession->isLoggedIn()) { ?>
+		                <div class="field password required">
+				            <label for="password required" class="label"><em>*</em><span><?= $block->escapeHtml(__('Password')) ?></span></label>
+				            <div class="control">
+				                <input type="password" name="password" id="password"
+				                       title="<?= $block->escapeHtmlAttr(__('Password')) ?>"
+				                       class="input-text"
+				                       data-password-min-length="<?= $block->escapeHtmlAttr($block->getMinimumPasswordLength()) ?>"
+				                       data-password-min-character-sets="<?= $block->escapeHtmlAttr($block->getRequiredCharacterClassesNumber()) ?>"
+				                       data-validate="{required:true, 'validate-customer-password':true}"
+				                       autocomplete="off">
+				            </div>
+				        </div>
+				        <div class="field confirmation required">
+				            <label for="password-confirmation" class="label required"><em>*</em><span><?= $block->escapeHtml(__('Confirm Password')) ?></span></label>
+				            <div class="control">
+				                <input type="password" name="password_confirmation" title="<?= $block->escapeHtmlAttr(__('Confirm Password')) ?>" id="password-confirmation" class="input-text" data-validate="{required:true, equalTo:'#password'}" autocomplete="off">
+				            </div>
+				        </div>
+				        <?php } ?>
+	            	</div>
+		            <div class="actions-toolbar">
+			            <div class="primary">
+			                <button type="submit" id="btn-submit" class="action submit primary" title="<?php /* @escapeNotVerified */ echo __('Create an Account') ?>"><span><?php /* @escapeNotVerified */ echo __('Submit') ?></span></button>
+			            </div>
+	            	</div>
+	            </fieldset>
+	        </div>
+	    </div>
+	</form>
+</div>
+
+<script type="text/javascript">
+    //<![CDATA[
+        Calendar.setup({
+            inputField: "purchasedate",
+            ifFormat: "%Y-%m-%d %H:%M:%S",
+            showsTime: true,
+            button: "date_select_trig",
+            align: "Bl",
+            singleClick : true
+        });
+
+        Calendar.setup({
+            inputField: "installdate",
+            ifFormat: "%Y-%m-%d %H:%M:%S",
+            showsTime: true,
+            button: "date_select_trig",
+            align: "Bl",
+            singleClick : true
+        });
+    //]]>
+</script>
+
+<script>
+require([
+    'jquery',
+    'mage/mage'
+], function($){
+
+    var dataForm = $('#form-validate');
+    var ignore = <?= /* @noEscape */ $_dob->isEnabled() ? '\'input[id$="full"]\'' : 'null' ?>;
+
+    dataForm.mage('validation', {
+    <?php if ($_dob->isEnabled()): ?>
+        errorPlacement: function(error, element) {
+            if (element.prop('id').search('full') !== -1) {
+                var dobElement = $(element).parents('.customer-dob'),
+                    errorClass = error.prop('class');
+                error.insertAfter(element.parent());
+                dobElement.find('.validate-custom').addClass(errorClass)
+                    .after('<div class="' + errorClass + '"></div>');
+            }
+            else {
+                error.insertAfter(element);
+            }
+        },
+        ignore: ':hidden:not(' + ignore + ')'
+    <?php else: ?>
+        ignore: ignore ? ':hidden:not(' + ignore + ')' : ':hidden'
+    <?php endif ?>
+    }).find('input:text').attr('autocomplete', 'off');
+
+});
+</script>
+<?php if ($block->getShowAddressFields()): ?>
+    <script type="text/x-magento-init">
+    {
+        "#country": {
+            "regionUpdater": {
+                "optionalRegionAllowed": <?php /* @escapeNotVerified */ echo($block->getConfig('general/region/display_all') ? 'true' : 'false'); ?>,
+                "regionListId": "#region_id",
+                "regionInputId": "#region",
+                "postcodeId": "#zip",
+                "form": "#form-validate",
+                "regionJson": <?php /* @escapeNotVerified */ echo $this->helper('Magento\Directory\Helper\Data')->getRegionJson() ?>,
+                "defaultRegion": "<?php /* @escapeNotVerified */ echo $block->getFormData()->getRegionId() ?>",
+                "countriesWithOptionalZip": <?php /* @escapeNotVerified */ echo $this->helper('Magento\Directory\Helper\Data')->getCountriesWithOptionalZip(true) ?>
+            }
+        }
+    }
+</script>
+<?php endif; ?>
+
+<script type="text/x-magento-init">
+    {
+        ".field.password": {
+            "passwordStrengthIndicator": {
+                "formSelector": "form.form-create-account"
+            }
+        }
+    }
+</script>
+
+<script>
+     require([
+          "jquery",
+          "mage/calendar"
+     ], function($){
+         $("#dateofpurchase").calendar({
+              buttonText:"<?php echo __('Select Date') ?>",
+         });
+       });
+</script>
+
+<script>
+     require([
+          "jquery",
+          "mage/calendar"
+     ], function($){
+         $("#dateofinstall").calendar({
+              buttonText:"<?php echo __('Select Date') ?>",
+         });
+
+        $('#product_placeholder_product').click(function(){
+			$('#product').toggle();
+
+			$('#product img').click(function() {
+				var val = $(this).attr('alt');
+				$('#product_placeholder_product').text(val);
+				$('#hiddenfield-product').val(val);
+				
+				$('#product').toggle();
+				$('#product_placeholder_tap').text('Select your Tap');
+				
+				if(val == 'Franke FilterFlow Plastic'){ 
+				$('#ff-Plastic').show();$('#ff-stainless').hide();
+				$('#ff-third').hide();
+				$(".boiler-tank").show();
+				
+				}
+				else if(val=='Franke FilterFlow Stainless'){
+					$('#ff-Plastic').hide();$('#ff-stainless').show();
+				    $('#ff-third').hide();
+				    $(".boiler-tank").hide();
+				}
+				else{
+				$('#ff-Plastic').hide();$('#ff-stainless').hide();
+				$('#ff-third').show();
+				$(".boiler-tank").show();
+				
+				}
+
+
+				if( $('#product_placeholder_product').text() != '--Select--' ) {$('#selectTap').removeClass('selectTap');}
+				$('#product').hide();
+			});
+
+			if($('#product_tap').css('display') == 'block'){
+				$('#product_tap').css('display','none');
+			} 
+		});
+
+		$('#product_placeholder_tap').click(function(){
+			$('#product_tap').toggle();
+			
+			$('#product_tap img').click(function() {
+				var val = $(this).attr('alt');
+				$('#product_placeholder_tap').text(val);
+				$('#product_tap').toggle();
+				$('#hiddenfield-product_tap').val(val);
+				$('#product_tap').hide();
+			});
+		}); 
+		 
+
+		$('.close').click(function() {
+			if($('#product').css('display') == 'block') {
+				$('#product').css('display','none');
+			} else {
+				$('#product_tap').css('display','none');
+			}
+		});
+
+		$('.boilertankimagefirst').click(function() {
+			var url = $("#boilertankimagefirst").attr('src');
+			window.open(url,'popUpWindow','height=300,width=400,left=10,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes');
+		});
+
+		$('.boilertankimagesecond').click(function() {
+			var url = $("#boilertankimagesecond").attr('src');
+			window.open(url,'popUpWindow','height=300,width=400,left=10,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes');
+		}); 
+
+
+		$('.firsttap').click(function() {
+			
+			var imagevalue = $(this).attr('alt');
+			if((imagevalue=="Larino") || (imagevalue=="Atessa") || (imagevalue=="Salara") || (imagevalue=="Mini Silk Steel/Chrome") || (imagevalue=="Zurich"))
+			{
+				$(".boiler-tank").hide();
+			} else {
+				$(".boiler-tank").show();
+			}
+			
+		});
+
+		
+
+		$(document).on('keypress','.nocustomval',function(e){
+		    var keyCode = e.keyCode || e.which; 
+			if (keyCode != 9) { 
+				return false;
+		    }  
+		});
+
+		$(".prefix").change(function () {
+			var value = $(this).val();
+            $(".prefixhidden").val(value); 
+        });   
+    });
+
+	
+	function checkLength(el) {
+				require([
+		    'jquery',
+		    'jquery/ui'
+		], function($) {
+			if ((el.value.length <= 6) || (el.value.length >= 12)) {
+			  	$(".boiltankserialnumberlength").css('display','block');
+			} else {
+			  	$(".boiltankserialnumberlength").css('display','none');
+			}
+		});   
+	}        
+
+</script>
+
+<script type="text/x-magento-init">
+    {
+        "#country": {
+            "regionUpdater": {
+                "optionalRegionAllowed": <?= /* @noEscape */ $block->getConfig('general/region/display_all') ? 'true' : 'false' ?>,
+                "regionListId": "#region_id",
+                "regionInputId": "#region",
+                "postcodeId": "#zip",
+                "form": "#form-validate",
+                "regionJson": <?= /* @noEscape */ $this->helper(\Magento\Directory\Helper\Data::class)->getRegionJson() ?>,
+                "defaultRegion": "<?= (int) $block->getFormData()->getRegionId() ?>",
+                "countriesWithOptionalZip": <?= /* @noEscape */ $this->helper(\Magento\Directory\Helper\Data::class)->getCountriesWithOptionalZip(true) ?>
+            }
+        }
+    }
+</script>
+
+<style>
+.productregistrationformright{
+	float: right; 
+	margin-right: -100%;
+	width: 100%;
+}
+
+.productregistrationformleft{
+	float: left;
+	width: 100%;
+	margin-left: -7px; 
+}
+
+.selectTap{
+	display:none;
+}
+</style>
+
+
+
+

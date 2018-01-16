@@ -1,0 +1,8 @@
+<?php // Get current product
+$product = $block->getProduct();
+?>
+<?php if($product->getData('faq')) { ?>
+	<div class="faq-section"> 
+		<?php echo $product->getData('faq'); ?>
+	</div> 
+<?php } ?>

@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+ 
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Backend/etc/menu.xsd">
+	<menu>
+		<add 
+		id="OM_Support::main_menu" 
+		title="Support" 
+		module="OM_Support" 
+		sortOrder="20" 
+		resource="OM_Support::support" 
+		/>
+		<add 
+		id="OM_Support::add_support" 
+		title="Add Support" 
+		module="OM_Support" 
+		sortOrder="1" 
+		parent="OM_Support::main_menu" 
+		action="support/support/new" 
+		resource="OM_Support::manage_support" 
+		/>
+		<add 
+		id="OM_Support::manage_support" 
+		title="Manage Support" 
+		module="OM_Support" 
+		sortOrder="2" 
+		parent="OM_Support::main_menu" 
+		action="support/support/index" 
+		resource="OM_Support::manage_support" 
+		/>
+		<add 
+		id="OM_Support::configuration" 
+		title="Configurations" 
+		module="OM_Support" 
+		sortOrder="3" 
+		parent="OM_Support::main_menu" 
+		action="adminhtml/system_config/edit/section/support_config" 
+		resource="OM_Support::configuration" 
+		/>
+	</menu>
+</config>

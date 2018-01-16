@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Solwin Infotech
+ * Solwin Product Print Page
+ * 
+ * @category   Solwin
+ * @package    Solwin_Printpage
+ * @copyright  Copyright © 2006-2016 Solwin (https://www.solwininfotech.com)
+ * @license    https://www.solwininfotech.com/magento-extension-license/
+ */
+-->
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Solwin_Printpage::css/printpage.css"/>
+    </head>
+    <body>
+        <referenceContainer name="product.info.main">
+            <!-- <block class="Magento\Catalog\Block\Product\View" name="printpage" template="Solwin_Printpage::printbtn.phtml" before="product.info.overview" ifconfig="printsection/printgroup/active" /> -->
+        </referenceContainer>
+    </body>
+</page>
