@@ -1,0 +1,167 @@
+/**
+ * Solwin Infotech
+ * Solwin Product Print Page
+ * 
+ * @category   Solwin
+ * @package    Solwin_Printpage
+ * @copyright  Copyright © 2006-2016 Solwin (https://www.solwininfotech.com)
+ * @license    https://www.solwininfotech.com/magento-extension-license/
+ */
+
+@media print,screen
+{
+    .additional-info {
+        border: 1px solid #ccc;
+        display: block;
+        margin: 20px 0 0;
+        float: left;
+        width: 100%;
+    }
+    .additional-info .table-wrapper{
+        margin-bottom: 0
+    }
+    .additional-info .col.data {
+        border-left: 1px solid #ccc;
+    }
+    caption.table-caption {
+        font-weight: bold;
+        margin: 10px 0;
+        text-align: center;
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+    .print-page-wrapper{
+        border-right: 1px solid #cccccc;
+        border-left: 1px solid #cccccc;
+        margin: 0 auto;
+        padding: 20px;
+        width: 90%;
+        height: 100%;
+    }
+    .print-img{
+        border-bottom: 1px solid #ccc;
+        margin: 0 auto 10px;
+        padding-bottom: 10px;
+        text-align: center;
+        width: 100%;
+    }
+    .print-img .img-class{
+        width: 80%;
+        float: left;
+        text-align: left;
+    }
+    .print-img .add-class{
+        width: 20%;
+        display: inline-block;
+        text-align: left;
+    }
+    .print-pro{
+        width: 100%;
+        display: block;
+        float: left;
+    }
+    .print-prod-img{
+        border: 1px solid #ccc;
+        display: inline-block;
+        padding-top: 15px;
+        text-align: center;
+        width: 35%;
+    }
+    .product-detail{
+        display: inline-block;
+        float: right;
+        width: 63%;
+    }
+    .product-detail h2{
+        margin-top: 0;
+    }
+    .inner-desc {
+        display: block;
+        padding: 10px 0;
+    }
+    .print-prod-img img{
+        text-align: center;
+        /*width: 100%;*/
+    }
+    .print-prod-name,.print-prod-desc,.price,.print-prod-type{
+        color: #403227;
+        font-size: 20px;
+        font-weight: 600;
+        margin-top: 7px;
+        /*text-align: center !important;*/
+        margin: 0 auto;
+        width: 100%;
+    }
+    .print-prod-name p,.print-desc p,.price p,.print-prod-type p,.center-stone p{
+        text-align: center !important;
+    }
+    .print-prod-name span{
+        display: block;
+        font-size: 16px;
+        font-weight: normal;
+        text-align: left !important;
+        width: 100%;
+    }
+    .print-prod-type {
+        margin-bottom: 10px;
+        font-size: 12px;
+        font-weight: normal;
+        width: 100%;
+    }
+    .print-prod-desc{
+        font-size: 18px !important;
+    }
+    .print-desc{
+        color: #403227;
+        font-size: 14px;
+        font-weight: normal;
+        margin: 0 auto;
+        text-align: center !important;
+        width: 100%;
+    }
+    .center-stone{
+        color: #383838;
+        font-size: 14px;
+        text-align: center;
+        margin-bottom: 15px;
+        width: 100%;
+    }
+    #scroll-to-top{
+        display: none;
+    }
+    .additional-notes {
+        border: 1px solid #cccccc;
+        float: left;
+        margin: 10px 0;
+        padding: 10px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+@page 
+{
+    size: auto;    /* auto is the initial value */
+    margin: 0mm;   /* this affects the margin in the printer settings  */
+}
+.btn-print {
+    clear: both;
+}
+.btn-print a {
+    background: none repeat scroll 0 0 #1979c3;
+    border-radius: 3px;
+    color: #ffffff;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 10px;
+    padding: 10px 15px;
+    text-decoration: none;
+    outline: none;
+    border: 1px solid #1979c3;
+}
+.btn-print a:hover {
+    background: #006BB4;
+    text-decoration: none;
+    border: 1px solid #006BB4;
+}

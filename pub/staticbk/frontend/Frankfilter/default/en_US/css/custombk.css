@@ -1,0 +1,113 @@
+﻿.navigation{ width: 36% !important; }
+.page-products .toolbar .limiter { display:block; }
+
+.custom-toolbarsection .toolbar .toolbar-products .field .limiter { display:none; } 
+
+.page-with-filter .toolbar-amount{ display:none; } 
+
+.toolbar-products .pages{ display:block; }
+
+.block-cart-failed .actions.main .continue, .block-cart-failed .actions.main .clear, .cart-container .form-cart .actions.main .continue, .cart-container .form-cart .actions.main .clear{ display:block; } 
+
+.cart-container .cart-discount{ 	display:none; } 
+
+#block-shipping{ display:none; }
+
+
+/*for the layout*/
+
+body  { color: #313131; font-family: Arial,Helvetica,sans-serif; font-size: 12px; }
+
+a { color: #555452; text-decoration: none; }
+
+a:hover { color: #dc281e; text-decoration: none; }
+
+input, select, textarea, button { color: #2f2f2f; font: 12px/15px Arial,Helvetica,sans-serif; vertical-align: middle; }
+
+.main-container { display: inline-block; width: 100%; }
+.main-container > .container { margin: 0 auto; max-width: 1240px; padding: 0 20px; }
+
+
+/*for the site header*/
+
+.page-wrapper .page-header .panel.wrapper { background-color: #e6e6e6; border: none; }
+.page-wrapper .page-header .panel.header { padding-bottom: 0; padding-top: 0; }
+
+
+.page-header .country_division_indicator { float: left; width:initial; }
+.country_division_indicator span { float: left; line-height: 24px; }
+.country_division_indicator span a { color: #646464; font-size: 0.9em; text-decoration: none; }
+.country_division_indicator span a.arrow-link { background: rgba(0, 0, 0, 0) url("../images/franke-icons-kitchen_systems.png") no-repeat scroll 0 -498px; padding-left: 11px; }
+.country_division_indicator span a.arrow-link:hover { background-position: 0 -598px; color: #dc281e; }
+
+
+.page-header .meta_navigation { float: right;  width:initial; }
+.meta_navigation span { float: left; height: 24px; line-height: 24px; padding: 0 10px; }
+.meta_navigation span a { color: #646464; display: block; font-size: 0.9em; line-height: 24px; text-transform: uppercase; text-decoration:none; }
+.meta_navigation span a:hover { color: #dc281e; }
+
+.meta_navigation span a.group_button { background: rgba(0, 0, 0, 0) url("../images/franke-icons-header.png") no-repeat scroll right -94px; padding-right: 33px; }
+.meta_navigation span a.find_dealer_button { background: rgba(0, 0, 0, 0) url("../images/franke-icons-header.png") no-repeat scroll right -197px; padding-right: 21px; }
+.meta_navigation span a.contact_button { background: rgba(0, 0, 0, 0) url("../images/franke-icons-header.png") no-repeat scroll right -294px; padding-right: 16px; }
+
+
+.page-header .panel .block-search { margin: 4px 0 0; padding-left: 10px; width: initial; position:static; }
+.page-header .panel .block-search .field { float: left; width: initial; }
+.page-header .panel .block-search .actions { float: left; width: initial; padding-left: 2px; }
+
+#search_mini_form #search { background: #fff none repeat scroll 0 0; border: medium none; color: #282828; display: inline; padding: 2px 2px 2px 7px; width: 168px; font: 12px/15px Arial,Helvetica,sans-serif; vertical-align: middle; height:initial;  }
+#search_mini_form button.action { background: rgba(0, 0, 0, 0) url("../images/franke-icons-header.png") no-repeat scroll 0 0; border: 0 none; cursor: pointer; height: 15px; outline: medium none; text-indent: -9999px; width: 15px; position:static; opacity: 1; }
+#search_mini_form button.action.search::before { content: none; }
+
+
+.page-header .header.content { padding-top: 24px; }
+.page-header .header.content .logo { margin: 0 50px 0 0; }
+
+
+.header.content .navigation { background: rgba(0, 0, 0, 0) none repeat scroll 0 0; float: left; width: initial; margin-top: 30px; }
+.header .navigation .ui-menu .ui-menu-item a { color: #282828; font-size: 1.3em; font-weight: 600; line-height: 1.3em; }
+
+
+.minicart-wrapper { float: right; width: 245px; margin-top: -12px; }
+.minicart-wrapper .header-phonenumber { color: #555452; float: right; font-size: 18px; font-weight: 600; letter-spacing: 1.4px; text-align: center; width: 210px; line-height: 24px; }
+.minicart-wrapper .header-phonenumber a { color: #555452; text-decoration: none; }
+
+.header .minicart-wrapper .customcart { background: #e6e6e6 none repeat scroll 0 0; display: inline-table; float: right; height: 41px; margin:10px 0 0; width: 210px; padding: 8px 5px; text-align: center; }
+.header .minicart-wrapper .showcart::before { content: none; }
+.header .minicart-wrapper .customcart .custom-carttext { color: #646464; float: left; font-size: 1em; font-weight: bold; position: relative; text-align: center; width: 100%; }
+.header .minicart-wrapper .customcart span.basket-empty { color: #db281e; display: inline-block; float: left; font-size: 1.225em; font-weight: 600; letter-spacing: 0.5px; line-height: 24px; position: relative; text-align: center; width: 100%; }
+
+
+
+/*for the homepage content*/
+
+
+.page-wrapper .nav-sections { margin-bottom: 20px; }
+
+.cms-home .page-main { max-width: 100%; padding: 0; }
+
+.page-breadcrumb { float: left; width: 100%; }
+.page-breadcrumb > p { margin-bottom: 27px; } 
+
+.slider-container { float: left; overflow: hidden; width: 100%; }
+.slider-container .magestore-bannerslide-flex-slider { margin-bottom: 13px !important; }
+.slider-container .magestore-bannerslide-flex-slider .flexslider { box-shadow: none; }
+
+.home-content { float: left; width: 100%; }
+
+
+
+.quickfilter { border-bottom: 1px solid #d9d9d9; clear: both; float: left; margin: 20px 0 0; padding: 10px 0; width: 100%; }
+
+.quickfilter-right { background: #e6e6e6 none repeat scroll 0 0; display: block; float: right; font-size: 14px; height: 42px; margin-top: -40px; width: 415px; }
+.quickfilter-right .quickfilterteext { font-size: 15px; font-weight: bold; padding: 10px; width: 95%; }
+.quickfilter-right select { height: 20px; margin-left: 10px; margin-right: 2px; float: right; margin-top: -18px; width: 185px; }
+
+.quickfilter-left { font-size: 15px; font-weight: bold; float:left; width: initial; }
+
+
+
+
+
+
+
