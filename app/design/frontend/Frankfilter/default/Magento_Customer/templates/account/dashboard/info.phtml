@@ -1,0 +1,41 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var \Magento\Customer\Block\Account\Dashboard\Info $block */
+?>
+<div class="dashboardpagecontent">
+    <div class="namesection"><?php echo __("Hello, "); ?><?= $block->escapeHtml($block->getName()) ?></div>
+    <?php echo __("From your My Account Dashboard you have the ability to view a snapshot of your recent account activity and update your account information. Select a link below to view or edit information."); ?>
+</div>
+<div class="block block-dashboard-info">
+    <div class="block-title"><strong><?= $block->escapeHtml(__('Account Information')) ?></strong></div>
+    <div class="block-content">
+        <div class="box box-information">
+            <strong class="box-title">
+                <span><?= $block->escapeHtml(__('Contact Information')) ?></span>
+                <a class="action edit" href="<?= $block->escapeUrl($block->getUrl('customer/account/edit')) ?>">
+                    <span><?= $block->escapeHtml(__('Edit')) ?></span>
+                </a>
+            </strong>
+            <div class="box-content">
+                <p>
+                    <?= $block->escapeHtml($block->getName()) ?><br>
+                    <?= $block->escapeHtml($block->getCustomer()->getEmail()) ?><br>
+                </p>
+            </div>
+            <div class="box-actions">
+                <a href="<?= $block->escapeUrl($block->getChangePasswordUrl()) ?>" class="action change-password">
+                    <?= $block->escapeHtml(__('Change Password')) ?>
+                </a>
+            </div>
+        </div>
+        <?php if ($block->isNewsletterEnabled()): ?>
+           
+        <?php endif; ?>
+    </div>
+</div>
