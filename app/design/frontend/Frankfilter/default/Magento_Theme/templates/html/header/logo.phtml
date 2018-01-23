@@ -1,0 +1,47 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/**
+ * @var \Magento\Theme\Block\Html\Header\Logo $block
+ */
+?>
+<?php $storeName = $block->getThemeName() ? $block->getThemeName() : $block->getLogoAlt();?>
+<span class="action nav-toggle" id="customtoggle"><span><?= /* @escapeNotVerified */ __('Toggle Nav') ?></span></span>
+<?php if ($block->isHomePage()):?>
+    <strong class="logo">
+<?php else: ?>
+    <a class="logo" href="<?= $block->getUrl('') ?>" title="<?= /* @escapeNotVerified */ $storeName ?>">
+<?php endif ?>
+        <img src="<?= /* @escapeNotVerified */ $block->getLogoSrc() ?>"
+             alt="<?= /* @escapeNotVerified */ $block->getLogoAlt() ?>"
+             <?= $block->getLogoWidth() ? 'width="' . $block->getLogoWidth() . '"' : '' ?>
+             <?= $block->getLogoHeight() ? 'height="' . $block->getLogoHeight() . '"' : '' ?>
+        />
+<?php if ($block->isHomePage()):?>
+    </strong>
+<?php else:?>
+    </a>
+<?php endif?>
+
+<script type="text/javascript">
+    require(['jquery'], function($){
+    	$("#customtoggle").click(function(){
+    		$(".navigation").slideToggle();
+    	});
+    });
+</script>
+
+<style>
+@media only screen 
+and (max-device-width: 1000px)
+{ 
+	.navigation{
+		display:none;
+	}
+} 
+</style>

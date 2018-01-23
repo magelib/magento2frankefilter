@@ -1,0 +1,13 @@
+<?php
+	$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+	$title = $objectManager->get('Magento\Framework\View\Page\Title');
+?>
+
+<div class="printtopheadersection" style="display:none">
+	<span class="datesection">
+		<?php echo date("d/m/Y"); ?>
+	</span>
+	<span class="printpagetitle">
+		<?php echo $title->get(); ?>
+	</span>
+</div> 
